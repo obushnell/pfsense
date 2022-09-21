@@ -2,7 +2,7 @@
 /*
  * globals.inc
  *
- * part of pfSense (https://www.pfsense.org)
+ * part of Demo (https://www.Demo.org)
  * Copyright (c) 2004-2013 BSD Perimeter
  * Copyright (c) 2013-2016 Electric Sheep Fencing
  * Copyright (c) 2014-2022 Rubicon Communications, LLC (Netgate)
@@ -45,7 +45,7 @@ $g = array(
 	"acbbackuppath" => "/cf/conf/acb/",
 	"event_address" => "unix:///var/run/check_reload_status",
 	"factory_shipped_username" => "admin",
-	"factory_shipped_password" => "pfsense",
+	"factory_shipped_password" => "Demo",
 	"upload_path" => "/root",
 	"dhcpd_chroot_path" => "/var/dhcpd",
 	"unbound_chroot_path" => "/var/unbound",
@@ -62,11 +62,11 @@ $g = array(
 	"cf_path" => "/cf",
 	"cf_conf_path" => "/cf/conf",
 	"www_path" => "/usr/local/www",
-	"xml_rootobj" => "pfsense",
+	"xml_rootobj" => "demo",
 	"admin_group" => "admins",
-	"product_name" => "pfSense",
-	"product_label" => "pfSense",
-	"product_label_html" => "Netgate pfSense<sup>&#174;</sup>",
+	"product_name" => "Demo",
+	"product_label" => "Demo",
+	"product_label_html" => "Netgate Demo<sup>&#174;</sup>",
 	"product_version" => trim(file_get_contents("/etc/version"), " \n"),
 	"product_copyright_years" => "2004 - ".date("Y"),
 	"disablehelpmenu" => false,
@@ -84,7 +84,7 @@ $g = array(
 	"services_dhcp_server_enable" => true,
 	"wireless_regex" => "/^(ath|athp|bwi|bwn|ipw|iwi|iwm|iwn|malo|mwl|ral|rsu|rtwn|rum|run|uath|upgt|ural|urtw|urtwn|wi|wpi|wtap|zyd)[0-9]+/",
 	"help_base_url" => "/help.php",
-	"pkg_prefix" => "pfSense-pkg-",
+	"pkg_prefix" => "Demo-pkg-",
 	"default_timezone" => "Etc/UTC",
 	"language" => "en_US",
 	"default_config_backup_count" => 30,
@@ -184,7 +184,7 @@ if (file_exists("/etc/inc/globals_override.inc")) {
 /* Read all XML files in following dir and load menu entries */
 $g["ext_menu_path"] = "/usr/local/share/{$g['product_name']}/menu";
 
-/* Cache file used to store pfSense version */
+/* Cache file used to store Demo version */
 $g["version_cache_file"] = "{$g['varrun_path']}/{$g['product_name']}_version";
 $g['version_cache_refresh'] = 2 * 60 * 60; /* 2h */
 
