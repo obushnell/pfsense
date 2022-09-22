@@ -1,0 +1,19 @@
+#!/bin/sh
+
+pkg install -y nano
+
+# Required for installing and building ports
+pkg install -y nginx poudriere-devel rsync
+
+# Required for building kernel and iso
+pkg install -y vmdktool curl qemu-user-static gtar xmlstarlet pkgconf openssl
+
+# Required for building iso
+portsnap fetch extract
+
+# not required but advised for building/monitoring/debugging
+pkg install -y htop screen wget mmv
+
+# Only install this if your FreeBSD is a virtual machine
+pkg install -y open-vm-tools
+

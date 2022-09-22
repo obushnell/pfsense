@@ -1,0 +1,48 @@
+#
+# build.conf
+#
+
+export PRODUCT_NAME="Demo"
+export PRODUCT_URL="https://PRODUCT_URL/"
+
+# Define FreeBSD repository, branch and specific commit
+export FREEBSD_REPO_BASE=https://github.com/obushnell/FreeBSD-src.git
+export POUDRIERE_PORTS_GIT_URL=https://github.com/obushnell/FreeBSD-ports.git
+export FREEBSD_BRANCH=Demo-2_6_0
+#export GIT_FREEBSD_COSHA1=##HASH##
+
+# Do not clean FreeBSD obj dirs
+#export NO_CLEAN_FREEBSD_OBJ=YES
+
+# rsync data to upload snapshots
+#export RSYNCIP="your.snapshot.server"
+#export RSYNCUSER="username"
+#export RSYNCPATH="/usr/local/www/snapshots"
+
+# rsync data to upload pkg repo
+#export PKG_RSYNC_HOSTNAME="pkg_repo_hostname"
+#export PKG_RSYNC_USERNAME="username"
+#export PKG_RSYNC_SSH_PORT="22"
+#export PKG_RSYNC_DESTDIR="/usr/local/www/beta/packages"
+
+# pkg repo URL
+#export PKG_REPO_SERVER_DEVEL="pkg+http://packages-beta.netgate.com/packages"
+#export PKG_REPO_SERVER_RELEASE="pkg+http://packages.netgate.com"
+#export PKG_REPO_SERVER_STAGING="pkg+http://release-staging.netgate.com/ce/packages"
+
+# Branch to replace pkg.conf template, defaults to $GIT_REPO_BRANCH_OR_TAG
+#export PKG_REPO_BRANCH_DEVEL="BRANCH"
+#export PKG_REPO_BRANCH_RELEASE="BRANCH"
+
+# Custom
+export DEFAULT_ARCH_LIST="amd64.amd64" # We only want to build an x64 ISO, we don't care of ARM versions
+
+export PKG_REPO_SIGNING_COMMAND="/root/sign/sign.sh ${PKG_REPO_SIGN_KEY}"
+
+export myIPAddress=$(ifconfig -a | grep inet | head -1 | cut -d ' ' -f 2)
+
+export PKG_REPO_SERVER_DEVEL="pkg+http://${myIPAddress}/packages"
+export PKG_REPO_SERVER_RELEASE="pkg+http://${myIPAddress}/packages"
+
+export PKG_REPO_SERVER_STAGING="pkg+http://${myIPAddress}/packages" # We need to also specify this variable, because even
+# if we don't build staging release some ports configuration is made for staging.
