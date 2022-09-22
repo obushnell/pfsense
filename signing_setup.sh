@@ -1,14 +1,16 @@
-#!/bin/sh
+#!zsh -e
 
-mkdir -p /root/sign/
-pushd /root/sign/
-openssl genrsa -out repo.key 2048
-chmod 0400 repo.key
-openssl rsa -in repo.key -out repo.pub -pubout
-printf "function: sha256\nfingerprint: `sha256 -q repo.pub`\n" > fingerprint
+if [ ! -f "/root/sign/sign.sh" ]; then
+	mkdir -p /root/sign/
+	pushd /root/sign/
+	openssl genrsa -out repo.key 2048
+	chmod 0400 repo.key
+	openssl rsa -in repo.key -out repo.pub -pubout
+	printf "function: sha256\nfingerprint: `sha256 -q repo.pub`\n" > fingerprint
 
-cat >> sign.sh << DONE
-#!/bin/sh
+	cat >> sign.sh << DONE
+#!/bin/sh -e
+
 read -t 2 sum
 [ -z "$sum" ] && exit 1
 echo SIGNATURE
@@ -19,9 +21,9 @@ cat /root/sign/repo.pub
 echo END
 DONE
 
-chmod +x sign.sh
-
-popd
+	chmod +x sign.sh
+	popd
+fi
 
 rm src/usr/local/share/Demo/keys/pkg/trusted/*
 cp /root/sign/fingerprint src/usr/local/share/Demo/keys/pkg/trusted/fingerprint
