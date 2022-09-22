@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mkdir -p /root/sign/
-cd /root/sign/
+pushd /root/sign/
 openssl genrsa -out repo.key 2048
 chmod 0400 repo.key
 openssl rsa -in repo.key -out repo.pub -pubout
@@ -20,3 +20,8 @@ echo END
 DONE
 
 chmod +x sign.sh
+
+popd
+
+rm src/usr/local/share/Demo/keys/pkg/trusted/*
+cp /root/sign/fingerprint src/usr/local/share/Demo/keys/pkg/trusted/fingerprint
